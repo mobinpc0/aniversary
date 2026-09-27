@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>27.09 — Three Years of Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --maroon:#3B0F14;
+    --rose:#C97064;
+    --paper:#F3E9DD;
+    --gold:#C9A15A;
+    --charcoal:#241C1A;
+    --paper-line: rgba(59,15,20,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--charcoal);
+    font-family:'Jost',sans-serif;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.serif{
+    font-family:'Playfair Display', serif;
+  }
+  a{color:inherit;}
+
+  /* subtle paper texture */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(59,15,20,0.035) 0, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(201,161,90,0.05) 0, transparent 45%);
+    z-index:0;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:6vh 6vw;
+    background:
+      linear-gradient(180deg, rgba(36,28,26,0.15) 0%, rgba(36,28,26,0.55) 78%, rgba(36,28,26,0.75) 100%),
+      url('images/couple.jpg') center 28% / cover no-repeat;
+  }
+  .hero-eyebrow{
+    color:var(--paper);
+    letter-spacing:0.35em;
+    font-size:0.72rem;
+    opacity:0.85;
+    margin-bottom:1.4rem;
+  }
+  .hero h1{
+    color:var(--paper);
+    font-size:clamp(2.6rem, 9vw, 6rem);
+    line-height:1.02;
+    margin:0;
+    font-weight:600;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold);
+  }
+  .hero-sub{
+    color:var(--paper);
+    opacity:0.9;
+    font-size:clamp(1rem,2vw,1.2rem);
+    margin-top:1.6rem;
+    max-width:34ch;
+    font-weight:300;
+  }
+  .hero-date{
+    margin-top:2.6rem;
+    color:var(--gold);
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:1.05rem;
+    letter-spacing:0.04em;
+  }
+  .scroll-cue{
+    position:absolute;
+    bottom:5vh;
+    left:50%;
+    transform:translateX(-50%);
+    width:1px;
+    height:52px;
+    background:linear-gradient(to bottom, rgba(243,233,221,0.9), transparent);
+    animation:cueMove 2.2s ease-in-out infinite;
+  }
+  @keyframes cueMove{
+    0%{opacity:0; height:0;}
+    40%{opacity:1; height:52px;}
+    100%{opacity:0; height:52px;}
+  }
+
+  /* ---------- SECTION FRAME ---------- */
+  section{
+    position:relative;
+    z-index:1;
+    padding:min(14vh,120px) 8vw;
+  }
+  .section-head{
+    max-width:640px;
+    margin:0 auto 4.5rem;
+    text-align:center;
+  }
+  .section-head .kicker{
+    display:block;
+    color:var(--rose);
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:1.05rem;
+    margin-bottom:0.6rem;
+  }
+  .section-head h2{
+    font-size:clamp(1.9rem,4vw,2.8rem);
+    margin:0;
+    color:var(--maroon);
+    font-weight:600;
+  }
+
+  /* ---------- COUNTER ---------- */
+  .counter-wrap{
+    background:var(--maroon);
+    color:var(--paper);
+    text-align:center;
+  }
+  .counter-wrap .section-head h2{color:var(--paper);}
+  .counter-wrap .section-head .kicker{color:var(--gold);}
+  #day-count{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(4rem,14vw,9rem);
+    line-height:1;
+    color:var(--gold);
+    letter-spacing:-0.02em;
+  }
+  .counter-label{
+    margin-top:0.6rem;
+    letter-spacing:0.3em;
+    font-size:0.75rem;
+    opacity:0.75;
+    text-transform:uppercase;
+  }
+  .counter-grid{
+    margin-top:3.5rem;
+    display:flex;
+    justify-content:center;
+    gap:clamp(1.6rem,5vw,4.5rem);
+    flex-wrap:wrap;
+  }
+  .counter-grid div{min-width:80px;}
+  .counter-grid .num{
+    font-family:'Playfair Display',serif;
+    font-size:1.9rem;
+    color:var(--rose);
+  }
+  .counter-grid .lbl{
+    font-size:0.68rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    opacity:0.65;
+    margin-top:0.3rem;
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{
+    max-width:760px;
+    margin:0 auto;
+    position:relative;
+  }
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:24px;
+    top:6px;
+    bottom:6px;
+    width:1px;
+    background:var(--paper-line);
+  }
+  .t-item{
+    position:relative;
+    padding-left:64px;
+    margin-bottom:3.2rem;
+  }
+  .t-item:last-child{margin-bottom:0;}
+  .t-item::before{
+    content:"";
+    position:absolute;
+    left:18px;
+    top:6px;
+    width:13px;
+    height:13px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--rose);
+  }
+  .t-date{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    color:var(--rose);
+    font-size:1rem;
+    margin-bottom:0.35rem;
+  }
+  .t-item h3{
+    margin:0 0 0.5rem;
+    font-size:1.35rem;
+    color:var(--maroon);
+    font-weight:600;
+  }
+  .t-item p{
+    margin:0;
+    line-height:1.7;
+    max-width:52ch;
+    opacity:0.85;
+    font-weight:300;
+  }
+
+  /* ---------- GALLERY (scrapbook) ---------- */
+  .gallery{
+    max-width:1100px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:1.6rem 1.2rem;
+    padding-top:1rem;
+  }
+  .polaroid{
+    background:#fff;
+    padding:14px 14px 44px;
+    box-shadow:0 18px 34px -14px rgba(36,28,26,0.35);
+    transition:transform .35s ease, box-shadow .35s ease;
+    position:relative;
+  }
+  .polaroid img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .polaroid figcaption{
+    position:absolute;
+    bottom:12px;
+    left:14px;
+    right:14px;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:0.92rem;
+    color:var(--charcoal);
+    opacity:0.75;
+  }
+  .polaroid:hover{
+    transform:translateY(-6px) rotate(0deg) !important;
+    box-shadow:0 26px 44px -16px rgba(36,28,26,0.42);
+  }
+  .p1{grid-column:1 / 6; aspect-ratio:4/5; transform:rotate(-3deg);}
+  .p2{grid-column:6 / 13; aspect-ratio:5/4; transform:rotate(2deg); margin-top:3rem;}
+  .p3{grid-column:1 / 8; aspect-ratio:5/4; transform:rotate(1.5deg); margin-top:-1rem;}
+  .p4{grid-column:8 / 13; aspect-ratio:4/5; transform:rotate(-2deg); margin-top:1.5rem;}
+
+  @media (max-width:720px){
+    .gallery{grid-template-columns:1fr; gap:2.4rem;}
+    .p1,.p2,.p3,.p4{grid-column:1/-1; margin-top:0;}
+  }
+
+  /* ---------- LETTER ---------- */
+  .letter-wrap{
+    background:linear-gradient(180deg,#fff 0%, var(--paper) 100%);
+  }
+  .letter{
+    max-width:620px;
+    margin:0 auto;
+    background:#fffdf9;
+    border:1px solid var(--paper-line);
+    padding:clamp(2.2rem,6vw,4rem);
+    box-shadow:0 30px 60px -30px rgba(59,15,20,0.25);
+    position:relative;
+  }
+  .letter::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:6px;
+    background:linear-gradient(90deg,var(--rose),var(--gold));
+  }
+  .letter p{
+    font-size:1.08rem;
+    line-height:1.9;
+    font-weight:300;
+    color:var(--charcoal);
+    margin:0 0 1.3rem;
+  }
+  .letter .sign{
+    margin-top:2rem;
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:1.6rem;
+    color:var(--rose);
+  }
+
+  /* ---------- PROMISES ---------- */
+  .promises{
+    max-width:900px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:2.2rem;
+  }
+  .promise{
+    text-align:center;
+    padding:2.4rem 1.4rem;
+    border:1px solid var(--paper-line);
+    background:rgba(255,255,255,0.5);
+  }
+  .promise .glyph{
+    font-family:'Playfair Display',serif;
+    font-style:italic;
+    font-size:2.2rem;
+    color:var(--rose);
+    margin-bottom:1rem;
+  }
+  .promise h3{
+    font-size:1.05rem;
+    margin:0 0 0.7rem;
+    color:var(--maroon);
+  }
+  .promise p{
+    font-size:0.92rem;
+    line-height:1.6;
+    opacity:0.75;
+    margin:0;
+    font-weight:300;
+  }
+  @media (max-width:720px){
+    .promises{grid-template-columns:1fr;}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--charcoal);
+    color:var(--paper);
+    text-align:center;
+    padding:4.5rem 6vw 3rem;
+  }
+  footer h2{
+    color:var(--paper);
+    font-size:clamp(1.6rem,4vw,2.4rem);
+    margin:0 0 0.5rem;
+  }
+  footer .to-inf{
+    color:var(--gold);
+    font-style:italic;
+  }
+  footer .fine{
+    margin-top:2.4rem;
+    font-size:0.75rem;
+    opacity:0.5;
+    letter-spacing:0.05em;
+  }
+
+  ::selection{background:var(--rose); color:#fff;}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <span class="hero-eyebrow">MOBIN &nbsp;&middot;&nbsp; LIZA</span>
+  <h1>Three years<br><em>of us.</em></h1>
+  <p class="hero-sub">A small archive of the ordinary days that turned out to be the good ones.</p>
+  <p class="hero-date">27th September, 2023 — and counting</p>
+  <div class="scroll-cue"></div>
+</section>
+
+<section class="counter-wrap" id="counter">
+  <div class="section-head">
+    <span class="kicker">still counting</span>
+    <h2>Every single day, on purpose</h2>
+  </div>
+  <div id="day-count">0</div>
+  <div class="counter-label">days together</div>
+  <div class="counter-grid">
+    <div><div class="num" id="c-years">0</div><div class="lbl">Years</div></div>
+    <div><div class="num" id="c-months">0</div><div class="lbl">Months</div></div>
+    <div><div class="num" id="c-weeks">0</div><div class="lbl">Weeks</div></div>
+    <div><div class="num" id="c-hours">0</div><div class="lbl">Hours</div></div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="section-head">
+    <span class="kicker">how we got here</span>
+    <h2>A short history of us</h2>
+  </div>
+  <div class="timeline">
+    <div class="t-item">
+      <div class="t-date">27 September 2023</div>
+      <h3>Day one</h3>
+      <p>The day it became official — a promise made on an ordinary evening that neither of us has forgotten since.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-date">Year one</div>
+      <h3>Learning each other</h3>
+      <p>Long calls, longer messages, and figuring out how to be a we — clumsy, honest, and completely worth it.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-date">Year two</div>
+      <h3>Showing up</h3>
+      <p>Through busy weeks, quiet worries, and everything in between — still choosing each other, every time.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-date">27 September 2025</div>
+      <h3>Two years, marked properly</h3>
+      <p>Cake, balloons, and gold letters on the wall spelling out a word we don't say lightly.</p>
+    </div>
+    <div class="t-item">
+      <div class="t-date">Today</div>
+      <h3>Three years</h3>
+      <p>Still here. Still us. This page is my small proof of it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="section-head">
+    <span class="kicker">kept, not just taken</span>
+    <h2>Moments worth framing</h2>
+  </div>
+  <div class="gallery">
+    <figure class="polaroid p1"><img src="images/couple.jpg" alt="Mobin and Liza together" loading="lazy"><figcaption>us, on a good night</figcaption></figure>
+    <figure class="polaroid p2"><img src="images/cake.jpg" alt="Anniversary cake and balloons" loading="lazy"><figcaption>happy anniversary, 2</figcaption></figure>
+    <figure class="polaroid p3"><img src="images/bouquet.jpg" alt="Liza with a bouquet of flowers" loading="lazy"><figcaption>flowers, half hiding a smile</figcaption></figure>
+    <figure class="polaroid p4"><img src="images/polaroid.jpg" alt="From Mobin to Liza, to infinity" loading="lazy"><figcaption>from me, to infinity</figcaption></figure>
+  </div>
+</section>
+
+<section class="letter-wrap">
+  <div class="section-head">
+    <span class="kicker">a letter, for today</span>
+    <h2>To Liza</h2>
+  </div>
+  <div class="letter">
+    <p>Three years ago I didn't know what our ordinary days would look like — I just knew I wanted to find out with you. Now I know: they look like boba runs, voice notes at odd hours, and someone always asking "amake bhalobashen?" and getting the same answer, every time.</p>
+    <p>Thank you for staying, for arguing with me only when it mattered, and for making a random Tuesday feel like an occasion just by being in it. You have made the last three years the easiest hard years of my life.</p>
+    <p>Here's to the version of us that's still being written.</p>
+    <div class="sign">Mobin</div>
+  </div>
+</section>
+
+<section id="promises">
+  <div class="section-head">
+    <span class="kicker">not resolutions, promises</span>
+    <h2>What year four gets from me</h2>
+  </div>
+  <div class="promises">
+    <div class="promise">
+      <div class="glyph">I</div>
+      <h3>To keep choosing you</h3>
+      <p>On the easy days and the harder ones — out loud, not just in my head.</p>
+    </div>
+    <div class="promise">
+      <div class="glyph">II</div>
+      <h3>To show up, always</h3>
+      <p>No need to ask twice. I'll be there, near or far.</p>
+    </div>
+    <div class="promise">
+      <div class="glyph">III</div>
+      <h3>To keep building this</h3>
+      <p>One more year, one more page, one more "to infinity."</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <h2>Happy 3rd Anniversary, <span class="to-inf">Liza.</span></h2>
+  <p>I love you infinity.</p>
+  <div class="fine">made with too much love by Mobin &middot; 27.09.2026</div>
+</footer>
+
+<script>
+  // Anniversary start date
+  const startDate = new Date('2023-09-27T00:00:00');
+
+  function updateCounter(){
+    const now = new Date();
+    const diffMs = now - startDate;
+    const diffDays = Math.floor(diffMs / (1000*60*60*24));
+    const diffHours = Math.floor(diffMs / (1000*60*60));
+    const years = Math.floor(diffDays/365);
+    const months = Math.floor((diffDays%365)/30);
+    const weeks = Math.floor(diffDays/7);
+
+    document.getElementById('day-count').textContent = diffDays.toLocaleString();
+    document.getElementById('c-years').textContent = years;
+    document.getElementById('c-months').textContent = months;
+    document.getElementById('c-weeks').textContent = weeks.toLocaleString();
+    document.getElementById('c-hours').textContent = diffHours.toLocaleString();
+  }
+  updateCounter();
+  setInterval(updateCounter, 60000);
+</script>
+
+</body>
+</html>
